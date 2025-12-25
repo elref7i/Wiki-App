@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import { StackProvider, StackTheme } from "@stackframe/stack";
+import type { Metadata } from "next";
 import { stackClientApp } from "../stack/client";
 import "./globals.css";
 import { NavBar } from "@/components/layouts/nav-bar";
@@ -16,13 +16,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`antialiased`} suppressHydrationWarning><StackProvider app={stackClientApp}><StackTheme>
-        {/* Navbar  */}
-        <NavBar />
+      <body className={`antialiased`} suppressHydrationWarning>
+        <StackProvider app={stackClientApp}>
+          <StackTheme>
+            {/* Navbar  */}
+            <NavBar />
 
-        {/* Content */}
-        <main className="p-5">{children}</main>
-      </StackTheme></StackProvider></body>
+            {/* Content */}
+            <main className="p-5">{children}</main>
+          </StackTheme>
+        </StackProvider>
+      </body>
     </html>
   );
 }
