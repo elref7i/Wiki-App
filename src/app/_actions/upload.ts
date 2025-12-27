@@ -1,4 +1,5 @@
 "use server";
+import { stackServerApp } from "@/stack/server";
 
 // Server action to handle uploads (stub)
 // TODO: Replace placeholder logic with real Cloudinary (or other) upload
@@ -11,6 +12,10 @@ export type UploadedFile = {
 };
 
 export async function uploadFile(formData: FormData): Promise<UploadedFile> {
+  const user = await stackServerApp.getUser({ or: "redirect" });
+  if (!user) {
+    throw new Error("User not found");
+  }
   // Basic validation constants
   const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
   const ALLOWED = ["image/jpeg", "image/png", "image/gif", "image/webp"];
